@@ -1,17 +1,18 @@
-const users = {};
+const users = [];
+
+const getUser = (email) => {
+  return users.find(user => user.email === email);
+};
 
 const addUser = (email, password, fullName, phone) => {
-  users[email] = { password, fullName, phone };
+  users.push({ email, password, fullName, phone });
 };
 
-const getUser = (email) => users[email];
-
-const updateUserPassword = (email, newPassword) => {
-  if (users[email]) {
-    users[email].password = newPassword;
-    return true;
+const updateUserPassword = (email, password) => {
+  const user = users.find(user => user.email === email);
+  if (user) {
+    user.password = password;
   }
-  return false;
 };
 
-module.exports = { addUser, getUser, updateUserPassword };
+module.exports = { getUser, addUser, updateUserPassword };
