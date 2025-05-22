@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const doctorRoutes = require('./routes/doctorRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
@@ -10,6 +11,7 @@ app.use(cors()); // Allow Angular frontend to connect
 app.use(express.json()); // Parse JSON bodies
 
 // Routes
+app.use('/api/doctors', doctorRoutes);
 app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
