@@ -5,7 +5,7 @@ const doctors = [
         {
             "id": "1",
             "name": "Dr. John Smith",
-            "img": "assests/images/doctor1.jpg",
+            "img": "assets/images/doctor1.jpg",
             "specialization": "Cardiologist",
             "experience": "15 years",
             "location": "MediHealth Hospital, New York",
@@ -14,7 +14,7 @@ const doctors = [
         {
             "id": "2",
             "name": "Dr. Emma Davis",
-            "img": "assests/images/doctor2.jpg",
+            "img": "assets/images/doctor2.jpg",
             "specialization": "Neurologist",
             "experience": "10 years",
             "location": "NeuroCare Clinic, Chicago",
