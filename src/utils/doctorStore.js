@@ -1,11 +1,11 @@
 
 const doctors = [
 {
-    "doctors": [
+    doctors: [
         {
             "id": "1",
             "name": "Dr. John Smith",
-            "img": "images/doctor1.jpg",
+            "img": "assests/images/doctor1.jpg",
             "specialization": "Cardiologist",
             "experience": "15 years",
             "location": "MediHealth Hospital, New York",
@@ -14,7 +14,7 @@ const doctors = [
         {
             "id": "2",
             "name": "Dr. Emma Davis",
-            "img": "images/doctor2.jpg",
+            "img": "assests/images/doctor2.jpg",
             "specialization": "Neurologist",
             "experience": "10 years",
             "location": "NeuroCare Clinic, Chicago",
@@ -23,7 +23,7 @@ const doctors = [
         {
             "id": "3",
             "name": "Dr. Michael Brown",
-            "img": "images/doctor3.jpg",
+            "img": "assets/images/doctor3.jpg",
             "specialization": "Pediatrician",
             "experience": "8 years",
             "location": "Happy Kids Pediatrics, Los Angeles",
@@ -32,7 +32,7 @@ const doctors = [
         {
             "id": "4",
             "name": "Dr. Olivia Wilson",
-            "img": "images/doctor4.jpg",
+            "img": "assets/images/doctor4.jpg",
             "specialization": "Orthopedic Surgeon",
             "experience": "12 years",
             "location": "Advanced Orthopedic Center, San Francisco",
@@ -41,7 +41,7 @@ const doctors = [
         {
             "id": "5",
             "name": "Dr. Liam Johnson",
-            "img": "images/doctor5.jpg",
+            "img": "assets/images/doctor5.jpg",
             "specialization": "Dermatologist",
             "experience": "9 years",
             "location": "SkinCare Specialists, Miami",
@@ -50,7 +50,7 @@ const doctors = [
         {
             "id": "6",
             "name": "Dr. Sophia Martinez",
-            "img": "images/doctor6.jpg",
+            "img": "assets/images/doctor6.jpg",
             "specialization": "Gynecologist",
             "experience": "14 years",
             "location": "Women’s Wellness Center, Houston",
@@ -62,3 +62,4 @@ const doctors = [
 const getDoctors = () => doctors;
 
 module.exports = { getDoctors };
+

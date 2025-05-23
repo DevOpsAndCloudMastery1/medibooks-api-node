@@ -1,7 +1,8 @@
 const { getDoctors } = require('../utils/doctorStore');
 
 const getAllDoctors = (req, res) => {
-  res.json({ doctors: getDoctors() });
+  const doctors = getDoctors();
+   res.json(doctors); 
 };
 
 module.exports = { getAllDoctors };
