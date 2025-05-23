@@ -61,5 +61,10 @@ const doctors = [
 ];
 const getDoctors = () => doctors;
 
-module.exports = { getDoctors };
+const getDoctorById = (id) => {
+  return doctors[0].doctors.find(doc => doc.id === id); // 👈 since you're wrapping inside `{ doctors: [] }`
+};
+
+module.exports = { getDoctors, getDoctorById };
+
 
