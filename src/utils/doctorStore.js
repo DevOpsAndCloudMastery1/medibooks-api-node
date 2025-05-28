@@ -65,6 +65,12 @@ const getDoctorById = (id) => {
   return doctors[0].doctors.find(doc => doc.id === id); // 👈 since you're wrapping inside `{ doctors: [] }`
 };
 
-module.exports = { getDoctors, getDoctorById };
+const addDoctorToStore = (newDoctor) => {
+  const doctor = { id: (doctors.length + 1).toString(), ...newDoctor };
+  doctors.push(doctor);
+  return doctor;
+};
+
+module.exports = { getDoctors, getDoctorById, addDoctorToStore };
 
 
