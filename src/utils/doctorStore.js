@@ -73,7 +73,7 @@ const addDoctorToStore = (newDoctor) => {
 
 module.exports = { getDoctors: () => doctors,
   getDoctorById: (id) => doctors[0].doctors.find(d => d.id === id),
-  addNewDoctor // ✅ export this 
+  addNewDoctor 
 };
 
 
