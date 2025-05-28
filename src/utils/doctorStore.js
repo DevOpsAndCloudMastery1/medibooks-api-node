@@ -59,21 +59,25 @@ const doctors = [
     ]
 }
 ];
+
 const getDoctors = () => doctors;
 
 const getDoctorById = (id) => {
-  return doctors[0].doctors.find(doc => doc.id === id); // 👈 since you're wrapping inside `{ doctors: [] }`
+  return doctors[0].doctors.find(doc => doc.id === id);
 };
 
-const addDoctorToStore = (newDoctor) => {
-  const doctor = { id: (doctors.length + 1).toString(), ...newDoctor };
-  doctors.push(doctor);
+const addNewDoctor = (newDoctor) => {
+  const doctor = {
+    id: (Math.floor(Math.random() * 100000)).toString(),
+    ...newDoctor
+  };
+  doctors[0].doctors.push(doctor);
   return doctor;
 };
 
-module.exports = { getDoctors: () => doctors,
-  getDoctorById: (id) => doctors[0].doctors.find(d => d.id === id),
-  addNewDoctor 
+module.exports = {
+  getDoctors,
+  getDoctorById,
+  addNewDoctor
 };
-
 
