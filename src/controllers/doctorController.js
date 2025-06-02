@@ -55,5 +55,5 @@ module.exports = {
   getAllDoctors,
   getDoctorDetails,
   addDoctor,
-  deleteDoctor
+  removeDoctorById
 };
