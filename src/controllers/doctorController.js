@@ -35,7 +35,7 @@ const addDoctor = (req, res) => {
   }
 
   // Save to fake database
-  const addedDoctor = addDoctorToStore(newDoctor);
+  const addedDoctor = addNewDoctor(newDoctor);
   res.status(201).json({ message: 'Doctor added successfully', doctor: addedDoctor });
 };
 
