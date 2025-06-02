@@ -75,9 +75,19 @@ const addNewDoctor = (newDoctor) => {
   return doctor;
 };
 
+const removeDoctorById = (id) => {
+  const index = doctors[0].doctors.findIndex(doc => doc.id === id);
+  if (index === -1) return false;
+
+  doctors[0].doctors.splice(index, 1);
+  return true;
+};
+
+
 module.exports = {
   getDoctors,
   getDoctorById,
-  addNewDoctor
+  addNewDoctor,
+  removeDoctorById
 };
 
