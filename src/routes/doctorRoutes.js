@@ -85,4 +85,28 @@ router.get('/:id', getDoctorDetails);
  */
 router.post('/', addDoctor); // 🔥 POST endpoint
 
+
+
+// Route: DELETE /api/doctors/:id
+/**
+ * @swagger
+ * /api/doctors/{id}:
+ *   delete:
+ *     summary: Delete a doctor by ID
+ *     tags: [Doctors]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Doctor ID
+ *     responses:
+ *       200:
+ *         description: Doctor deleted successfully
+ *       404:
+ *         description: Doctor not found
+ */
+router.delete('/:id', deleteDoctor);
+
 module.exports = router;
