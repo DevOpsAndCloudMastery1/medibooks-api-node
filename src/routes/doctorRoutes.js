@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllDoctors, getDoctorDetails, addDoctor } = require('../controllers/doctorController');
+const { getAllDoctors, getDoctorDetails, addDoctor, deleteDoctor } = require('../controllers/doctorController');
 
 /**
  * @swagger
