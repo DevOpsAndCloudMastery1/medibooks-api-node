@@ -1,4 +1,4 @@
-const { getDoctors, getDoctorById, addNewDoctor } = require('../utils/doctorStore');
+const { getDoctors, getDoctorById, addNewDoctor, removeDoctorById } = require('../utils/doctorStore');
 
 // GET /api/doctors
 const getAllDoctors = (req, res) => {
@@ -16,6 +16,18 @@ const getDoctorDetails = (req, res) => {
   }
 
   res.json(doctor);
+};
+
+//DELETE /api/doctors/:id
+const deleteDoctor = (req, res) => {
+  const id = req.params.id;
+  const success = removeDoctorById(id);
+
+  if (!success) {
+    return res.status(404).json({ message: 'Doctor not found' });
+  }
+
+  res.json({ message: 'Doctor deleted successfully' });
 };
 
 // POST /api/doctors
@@ -42,5 +54,6 @@ const addDoctor = (req, res) => {
 module.exports = {
   getAllDoctors,
   getDoctorDetails,
-  addDoctor
+  addDoctor,
+  deleteDoctor
 };
