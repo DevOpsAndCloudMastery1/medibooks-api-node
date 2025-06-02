@@ -1,4 +1,4 @@
-const { getDoctors, getDoctorById, addDoctorToStore } = require('../utils/doctorStore');
+const { getDoctors, getDoctorById, addNewDoctor } = require('../utils/doctorStore');
 
 // GET /api/doctors
 const getAllDoctors = (req, res) => {
