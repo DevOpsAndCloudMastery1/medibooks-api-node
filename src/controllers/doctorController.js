@@ -42,7 +42,7 @@ const addDoctor = (req, res) => {
 // PUT /api/doctors/:id
 const updateDoctor = (req, res) => {
   const { id } = req.params;
-  const updatedData = updateDoctorById (id, req.body);
+  const updatedDoctor = updateDoctorById (id, req.body);
   if (!updatedDoctor) {
     return res.status(404).json({ message: 'Doctor not found' });
   }
