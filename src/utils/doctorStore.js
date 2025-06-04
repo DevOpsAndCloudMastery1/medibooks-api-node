@@ -75,6 +75,18 @@ const addNewDoctor = (newDoctor) => {
   return doctor;
 };
 
+const updateDoctorById = (id, updatedData) => {
+  const index = doctors[0].doctors.findIndex(doc => doc.id === id);
+  if (index === -1) return null;
+
+  doctors[0].doctors[index] = {
+    ...doctors[0].doctors[index],
+    ...updatedData
+  };
+
+  return doctors[0].doctors[index];
+};
+
 const removeDoctorById = (id) => {
   const index = doctors[0].doctors.findIndex(doc => doc.id === id);
   if (index === -1) return false;
@@ -88,6 +100,7 @@ module.exports = {
   getDoctors,
   getDoctorById,
   addNewDoctor,
+  updateDoctorById,
   removeDoctorById
 };
 
