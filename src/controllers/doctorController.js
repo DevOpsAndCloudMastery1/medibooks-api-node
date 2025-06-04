@@ -18,18 +18,6 @@ const getDoctorDetails = (req, res) => {
   res.json(doctor);
 };
 
-//DELETE /api/doctors/:id
-const deleteDoctor = (req, res) => {
-  const id = req.params.id;
-  const success = removeDoctorById(id);
-
-  if (!success) {
-    return res.status(404).json({ message: 'Doctor not found' });
-  }
-
-  res.json({ message: 'Doctor deleted successfully' });
-};
-
 // POST /api/doctors
 const addDoctor = (req, res) => {
   const newDoctor = req.body;
@@ -51,9 +39,35 @@ const addDoctor = (req, res) => {
   res.status(201).json({ message: 'Doctor added successfully', doctor: addedDoctor });
 };
 
+// PUT /api/doctors/:id
+const updateDoctor = (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+
+  const doctorIndex = doctors.findIndex(doc => doc.id === id);
+  if (doctorIndex === -1) {
+    return res.status(404).json({ message: 'Doctor not found' });
+  }
+
+  doctors[doctorIndex] = { ...doctors[doctorIndex], ...updatedData };
+  res.json({ message: 'Doctor updated successfully', doctor: doctors[doctorIndex] });
+};
+
+//DELETE /api/doctors/:id
+const deleteDoctor = (req, res) => {
+  const id = req.params.id;
+  const success = removeDoctorById(id);
+
+  if (!success) {
+    return res.status(404).json({ message: 'Doctor not found' });
+  }
+
+  res.json({ message: 'Doctor deleted successfully' });
+};
 module.exports = {
   getAllDoctors,
   getDoctorDetails,
   addDoctor,
+  updateDoctor,
   deleteDoctor
 };
