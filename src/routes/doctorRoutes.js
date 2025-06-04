@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllDoctors, getDoctorDetails, addDoctor, deleteDoctor } = require('../controllers/doctorController');
+const { getAllDoctors, getDoctorDetails, addDoctor, updateDoctor, deleteDoctor } = require('../controllers/doctorController');
 
 /**
  * @swagger
@@ -84,6 +84,46 @@ router.get('/:id', getDoctorDetails);
  *         description: Invalid doctor data
  */
 router.post('/', addDoctor); // 🔥 POST endpoint
+
+/**
+ * @swagger
+ * /api/doctors/{id}:
+ *   put:
+ *     summary: Update an existing doctor by ID
+ *     tags: [Doctors]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Doctor ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               specialization:
+ *                 type: string
+ *               experience:
+ *                 type: string
+ *               location:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               img:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Doctor updated successfully
+ *       404:
+ *         description: Doctor not found
+ */
+router.put('/:id', updateDoctor);
 
 
 
