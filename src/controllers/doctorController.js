@@ -1,4 +1,4 @@
-const { getDoctors, getDoctorById, addNewDoctor, updateDoctorByID, removeDoctorById } = require('../utils/doctorStore');
+const { getDoctors, getDoctorById, addNewDoctor, updateDoctorById, removeDoctorById } = require('../utils/doctorStore');
 
 // GET /api/doctors
 const getAllDoctors = (req, res) => {
@@ -42,7 +42,7 @@ const addDoctor = (req, res) => {
 // PUT /api/doctors/:id
 const updateDoctor = (req, res) => {
   const { id } = req.params;
-  const updatedData = updateDoctorByID (id, req.body);
+  const updatedData = updateDoctorById (id, req.body);
   if (!updatedDoctor) {
     return res.status(404).json({ message: 'Doctor not found' });
   }
