@@ -3,7 +3,7 @@ const pool = require('../utils/db');
 // GET /api/doctors
 const getAllDoctors = async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM doctors ORDER BY id ASC');
+    const result = await pool.query('SELECT * FROM doctors');
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching doctors:', error);
