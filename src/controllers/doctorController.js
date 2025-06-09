@@ -1,64 +1,83 @@
-const {
-  getDoctors,
-  getDoctorById,
-  addNewDoctor,
-  updateDoctorById,
-  removeDoctorById
-} = require('../utils/doctorStore');
+const pool = require('../utils/db');
 
 // GET /api/doctors
-const getAllDoctors = (req, res) => {
-  const doctors = getDoctors();
-  res.json(doctors);
+const getAllDoctors = async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM doctors ORDER BY id ASC');
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching doctors:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 };
 
 // GET /api/doctors/:id
-const getDoctorDetails = (req, res) => {
-  const id = req.params.id;
-  const doctor = getDoctorById(id);
-  if (!doctor) {
-    return res.status(404).json({ message: 'Doctor not found' });
+const getDoctorDetails = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query('SELECT * FROM doctors WHERE id = $1', [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Doctor not found' });
+    }
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error fetching doctor:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
-  res.json({ doctor }); // 👈 Wrap inside "doctor" key (for frontend consistency)
 };
 
 // POST /api/doctors
-const addDoctor = (req, res) => {
-  const newDoctor = req.body;
-  if (
-    !newDoctor.name ||
-    !newDoctor.specialization ||
-    !newDoctor.experience ||
-    !newDoctor.location ||
-    !newDoctor.description ||
-    !newDoctor.img
-  ) {
-    return res.status(400).json({ message: 'Invalid doctor data' });
+const addDoctor = async (req, res) => {
+  const { name, img, specialization, experience, location, description } = req.body;
+  try {
+    const result = await pool.query(
+      `INSERT INTO doctors (name, img, specialization, experience, location, description)
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [name, img, specialization, experience, location, description]
+    );
+    res.status(201).json({ message: 'Doctor added successfully', doctor: result.rows[0] });
+  } catch (error) {
+    console.error('Error adding doctor:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
-
-  const addedDoctor = addNewDoctor(newDoctor);
-  res.status(201).json({ message: 'Doctor added successfully', doctor: addedDoctor });
 };
 
 // PUT /api/doctors/:id
-const updateDoctor = (req, res) => {
+const updateDoctor = async (req, res) => {
   const { id } = req.params;
-  const updatedDoctor = updateDoctorById(id, req.body);
-  if (!updatedDoctor) {
-    return res.status(404).json({ message: 'Doctor not found' });
-  }
+  const { name, img, specialization, experience, location, description } = req.body;
+  try {
+    const result = await pool.query(
+      `UPDATE doctors 
+       SET name = $1, img = $2, specialization = $3, experience = $4, location = $5, description = $6
+       WHERE id = $7 RETURNING *`,
+      [name, img, specialization, experience, location, description, id]
+    );
 
-  res.json({ message: 'Doctor updated successfully', doctor: updatedDoctor });
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: 'Doctor not found' });
+    }
+
+    res.json({ message: 'Doctor updated successfully', doctor: result.rows[0] });
+  } catch (error) {
+    console.error('Error updating doctor:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 };
 
 // DELETE /api/doctors/:id
-const deleteDoctor = (req, res) => {
-  const id = req.params.id;
-  const success = removeDoctorById(id);
-  if (!success) {
-    return res.status(404).json({ message: 'Doctor not found' });
+const deleteDoctor = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query('DELETE FROM doctors WHERE id = $1', [id]);
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: 'Doctor not found' });
+    }
+    res.json({ message: 'Doctor deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting doctor:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
-  res.json({ message: 'Doctor deleted successfully' });
 };
 
 module.exports = {
